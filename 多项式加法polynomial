@@ -1,0 +1,81 @@
+package javaExample;
+
+import java.util.Scanner;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		int exp;
+		int max_length = 101;
+		int max_exp = -1;
+		int[] coef = new int[max_length];
+		
+		for( int i=1; i<=2 ;i++ ) {
+			do {
+				exp = in.nextInt();
+				coef[exp] += in.nextInt();
+			}while( exp != 0 );
+			
+		}
+		
+		for( int i=coef.length-1; i>=0 ; i-- ) {
+			if( coef[i] != 0 ) {
+				max_exp = i;
+				break;
+			}
+		}
+		
+		if( max_exp == -1 ) {   // no polynomial 
+			System.out.println("0");
+		}
+		else if( max_exp == 0 ) {  // only coef of 0'exp
+			System.out.println( coef[max_exp] );
+		}
+		
+		if( coef[max_exp] == 1) {  //print coef of max_exp
+			System.out.print("x");
+		}
+		else if( coef[max_exp] == -1 ){
+			System.out.print("-x");
+		}
+		else {
+			System.out.print( coef[max_exp] + "x" );
+		}
+		
+		// if max_exp is not 1, print exponent
+		if( max_exp != 1 ) {
+			System.out.print(max_exp);
+		}
+		
+		for( int j=max_exp-1; j>0 ; j-- ) {
+			//print coefficient
+			if( coef[j] > 1 ) {
+				System.out.print( "+"+coef[j]+"x" );
+			}
+			else if( coef[j] < -1 ) {
+				System.out.print( "-"+coef[j]+"x" );
+			}
+			else if( coef[j] == 1 ) {
+				System.out.print( "+x" );
+			}
+			else if( coef[j] == -1 ){
+				System.out.print( "-x" );
+			}
+			
+			// print exponent
+			if( coef[j] != 0 ) {
+				System.out.print(j);
+			}
+		}
+		
+		if( coef[0] > 0 ) {
+			System.out.print( "+"+coef[0] );
+		}
+		else if( coef[0] < 0 ) {
+			System.out.print( coef[0] );
+		}
+		
+	}
+
+}
