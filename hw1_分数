@@ -1,0 +1,64 @@
+import java.util.Scanner;
+
+class Fraction{
+	int top, bottom;
+	
+	Fraction( int a, int b ){
+		this.top = a;
+		this.bottom = b;
+	}
+
+	double toDouble() {
+		return (double)top/bottom;
+	}
+	
+	Fraction plus( Fraction r ) {
+		Fraction result = new Fraction(0,1);
+		result.bottom = this.bottom*r.bottom;
+		result.top = this.top*r.bottom + r.top*this.bottom;
+		return result;
+	}
+	
+	Fraction multiply( Fraction r ) {
+		Fraction result = new Fraction(0,1);
+		result.top = this.top*r.top;
+		result.bottom = this.bottom*r.bottom;
+		return result;
+	}
+	
+	void print() {
+		int x = this.top;
+		int y = this.bottom;
+		int r;
+	    if( this.top == this.bottom ) {
+	    	System.out.println(1);
+	    	return;
+	    }
+	    
+	    while( y != 0 ) {
+	    	r = x%y;
+	    	x = y;
+	    	y = r;
+	    }
+	    
+	    this.top /= x;
+	    this.bottom /= x;
+	    System.out.println( this.top + "/" + this.bottom); 
+	}
+}
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		Fraction a = new Fraction(in.nextInt(), in.nextInt());
+		Fraction b = new Fraction(in.nextInt(),in.nextInt());
+		a.print();
+		b.print();
+		a.plus(b).print();
+		a.multiply(b).plus(new Fraction(5,6)).print();
+		a.print();
+		b.print();
+		in.close();
+	}
+}
