@@ -1,0 +1,57 @@
+package javaExample;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+class Mileages{
+	private ArrayList<String> city = new ArrayList<String>();
+	private HashMap<String,HashMap<String, Integer>> miles = new HashMap<String, HashMap<String,Integer>>();
+	
+	private static Scanner in = new Scanner(System.in);
+
+	public void inputCityName() {
+		while(true) {
+			String cname = in.next();
+			if( cname.equals("###") ) {
+				break;
+			}
+			else {
+				city.add(cname);
+			}
+		}
+	}
+	
+	public void inputMiles() {
+		int n = city.size();
+		for( int i=0; i<n; i++) {
+			HashMap<String, Integer> temp = new HashMap<String, Integer>();
+			for( int j=0; j<n; j++ ) {
+				int distance = in.nextInt();
+				temp.put(city.get(j),distance);
+			}
+			miles.put( city.get(i),temp );
+		}
+		
+	}
+	
+	public int lookupDistance( String city1, String city2 ) {
+		int distance = miles.get(city1).get(city2);
+		return distance;
+	}
+}
+
+public class Main {
+	
+	public static void main(String[] args) {
+		Scanner in = new Scanner(System.in);
+		Mileages mileages = new Mileages();
+		
+		mileages.inputCityName();
+		mileages.inputMiles();
+		String city1 = in.next();
+		String city2 = in.next();
+		int distance = mileages.lookupDistance(city1, city2);
+		System.out.println(distance);
+	}
+}
